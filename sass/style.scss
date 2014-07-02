@@ -1,0 +1,86 @@
+@import "compass";
+@import "_animation-mixins.scss";
+@import "base";
+@import "porte";
+@import "valise";
+@import "voilier";
+@import "bateau";
+@import "hublot";
+@import "marteau";
+
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+body {
+	//background: radial-gradient(circle at 50% 100%, transparent 30%, $color 34%, $color 35%, transparent 38%, transparent), radial-gradient(circle at 50% 0%, transparent 30%, $color 21%, $color 34%, transparent 35%, transparent) 74px 0;
+	//background-color: slategray;
+	//background-size: 20px 30px;
+}
+
+
+.container {
+	position: absolute;
+	top: 190px;
+	left: 50%;
+	margin-left: -50px;
+	width: 100px;
+	height: 100px;
+
+
+}
+.grille {
+	background: lemonchiffon;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0px;
+		left: 50px;
+		width: 1px;
+		height: 100px;
+		background: red;
+		z-index: 1;
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		top: 50px;
+		left:0px;
+		width: 100px;
+		height: 1px;
+		background: red;
+	}
+}
+
+
+.story {
+	//@include animation( rotate 4s infinite linear );
+	@include transform-origin(50px, 50px);
+}
+
+
+.objet, .util1 {
+
+	position: absolute;
+	@include transition( all .5s ease-in-out );
+
+	&::before {
+		content: '';
+		position: absolute;
+		@include transition( all .5s ease-in-out );
+	}
+	
+	&::after {
+		content: '';
+		position: absolute;
+		@include transition( all .5s ease-in-out );
+	}
+}
+
+.util1 {
+	z-index: -1;
+}
+
+
+@include keyframes( rotate ) {
+	0%		{ @include rotate(0deg); }
+	100%	{ @include rotate(359deg); }
+}

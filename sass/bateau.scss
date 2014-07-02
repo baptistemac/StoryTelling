@@ -1,0 +1,47 @@
+@import "base";
+
+
+.bateau {
+	// En attendant la rotation continu de .story
+	//@include rotate(-200deg);
+	@include animation( tangue 1.5s infinite linear );
+	@include transform-origin(top, center);
+
+
+	// Cheminée
+	left: 10px;
+	top: 12px;
+	width: 20px;
+	height: 30px;
+	border: $linebold solid $color;
+	@include border-radius(0px);
+	
+	// Trait
+	&::before {
+		top: 0px;
+		left: -42px;
+		width: 88px;
+		height: 0px;
+		border: 1px solid $color;
+		z-index: 2;
+	}
+	
+	// Coque
+	&::after {
+		left: -47px;
+		top: -17px;
+		width: 91px;
+		height: 18px;
+		@include border-radius(50px 50px 0 0);
+		border: $linebold solid $color;
+		background: white;
+	}
+}
+
+@include keyframes( tangue ) {
+	0%		{ @include rotate(-180deg); }
+	25%		{ @include rotate(-185deg); }
+	50%		{ @include rotate(-180deg); }
+	75%		{ @include rotate(-175deg); }
+	100%	{ @include rotate(-180deg); }
+}

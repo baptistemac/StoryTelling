@@ -1,0 +1,59 @@
+@import "base";
+
+
+.porte {
+
+	// Poignée
+	top: 0px;
+	left: 0px;
+	width: 30px;
+	height: 30px;
+	border: none;
+	@include border-radius(8px);
+	@include transform-origin(top, left);
+	@include transform( skewY(0) scaleX(1) );
+
+	
+	// Poignée
+	&::before {
+		left: 48px;
+		top: 56px;
+		width: 15px;
+		height: 2px;
+		border: $line solid $color;
+		@include border-radius(8px);
+		z-index: 1;
+	}
+	
+	// Porte
+	&::after {
+		left: 0px;
+		top: 0px;
+		width: 70px;
+		height: 100px;
+		border: $linebold solid $color;
+		@include border-radius(4px);
+		background: white;
+	}
+
+	&.open {
+		@include transform( skewY(20deg) scaleX(.6) );
+	}
+}
+
+
+.porte + .util1 {
+	display: block;
+
+	&::before {
+		width: 70px;
+		height: 100px;
+		border: $line solid $color;
+		@include border-radius(4px);
+		background: #45acee;
+	}
+
+	&::after {
+
+	}
+}

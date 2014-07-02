@@ -1,0 +1,37 @@
+@import "base";
+
+
+.valise {
+	
+	@include transform( skewY(0) scaleX(1) );
+
+	// Poignée
+	top: 0px;
+	left: 30px;
+	width: 30px;
+	height: 30px;
+	@include border-radius(8px);
+	border: $linebold solid $color;
+	
+	// Motif
+	&::before {
+		left: -34px;
+		top: 30px;
+		width: 93px;
+		height: 19px;
+		border: $line solid $color;
+		z-index: 1;
+	}
+	
+	// Contenant
+	&::after {
+		left: -34px;
+		top: 7px;
+		width: 91px;
+		height: 60px;
+		@include border-radius(8px);
+		border: $linebold solid $color;
+		background: white;
+	}
+}
+

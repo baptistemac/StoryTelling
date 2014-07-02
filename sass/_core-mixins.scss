@@ -1,0 +1,237 @@
+// For clearing floats like a boss h5bp.com/q
+// ------------------------------------------
+@mixin tp1_clearfix {
+  // For modern browsers
+  &:before,
+  &:after {
+    content:"";
+    display:table;
+  }
+
+  &:after {
+    clear:both;
+  }
+
+  // For IE 6/7 (trigger hasLayout)
+  & {
+    zoom:1;
+  }
+}
+
+
+// Center-align a block level element
+// ----------------------------------
+@mixin tp1_center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// IE7 inline-block
+// ----------------
+@mixin tp1_ie7-inline-block {
+  *display: inline; /* IE7 inline-block hack */
+  *zoom: 1;
+}
+
+
+// IE7 likes to collapse whitespace on either side of the inline-block elements.
+// Ems because we're attempting to match the width of a space character. Left
+// version is for form buttons, which typically come after other elements, and
+// right version is for icons, which come before. Applying both is ok, but it will
+// mean that space between those elements will be .6em (~2 space characters) in IE7,
+// instead of the 1 space in other browsers.
+// ---------------------------------------------------------------------------------
+@mixin tp1_ie7-restore-left-whitespace {
+  *margin-left: .3em;
+
+  &:first-child {
+    *margin-left: 0;
+  }
+}
+
+@mixin tp1_ie7-restore-right-whitespace {
+  *margin-right: .3em;
+}
+
+
+// CSS image replacement
+// ---------------------
+// Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
+@mixin tp1_hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+
+// Image replacement
+// -----------------
+@mixin tp1_imgreplace {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+  *text-indent: -9999px;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+  }
+}
+
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+// -----------------------------------------------------
+@mixin tp1_hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+// -----------------------------------------------------------------------
+@mixin tp1_visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  // Extends the .visuallyhidden class to allow the element to be focusable
+  // when navigated to via the keyboard: h5bp.com/p
+  // ----------------------------------------------------------------------
+  &.focusable:active
+  &.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+
+// Hide visually and from screen readers, but maintain layout
+// ---------------------------------------------------------
+@mixin tp1_invisible {
+  visibility: hidden;
+}
+
+
+// User select
+// For selecting text on the page
+@mixin tp1_user-select($select) {
+  -webkit-user-select: $select;
+     -moz-user-select: $select;
+      -ms-user-select: $select;
+       -o-user-select: $select;
+          user-select: $select;
+}
+
+
+// FONTS
+// --------------------------------------------------
+@mixin tp1_font($sizeValue: 1.6, $lineHeight: false) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+  
+  @if ($lineHeight != false) {
+    line-height: ($lineHeight * 10) + px;
+    line-height: $lineHeight + rem;
+  } @else {
+    line-height: ($sizeValue * 15) + px;
+    line-height: ($sizeValue * 1.5) + rem;
+  }
+}
+
+@mixin tp1_font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10 ) + px;
+  font-size: $sizeValue + rem;
+}
+
+@mixin tp1_line-height($sizeValue: 2.4) {
+  line-height: ($sizeValue * 10) + px;
+  line-height: $sizeValue + rem;
+}  
+
+
+// IMAGE NORMAL & RETINA SIZE
+// --------------------------------------------------
+@mixin tp1_image($image, $image2x, $width, $height, $position: false) {
+  background-image: url($image);
+
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {   
+    background-image: url($image2x);
+    background-size: $width $height;
+  } 
+
+  @if ($position != false) {
+    background-position: $position;
+  } 
+}    
+
+
+// Animation
+//----------------------------
+
+@mixin animation($animation){
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -ms-animation: $animation;
+  -o-animation: $animation;
+  animation: $animation;
+}
+
+@mixin tp1_keyframes($animationName){
+  @-webkit-keyframes $animationName {
+    @content;
+  }
+  @-moz-keyframes $animationName {
+    @content;
+  }
+  @-ms-keyframes $animationName {
+    @content;
+  }
+  @-o-keyframes $animationName {
+    @content;
+  }
+  @keyframes $animationName {
+    @content;
+  }
+}
+
+
+// Prefixes
+//----------------------------
+@mixin tp1_prefixes($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+}
+
+
+// Placeholders
+//----------------------------
+// https://github.com/michaelsacca/Compass-Placeholder-Text-Mixin
+@mixin tp1_input-placeholder() {
+  // &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; } 
+}
+

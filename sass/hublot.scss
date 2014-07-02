@@ -1,0 +1,85 @@
+@import "base";
+
+
+.hublot {
+	// En attendant la rotation continu de .story
+	@include rotate(0deg);
+
+	// Fenetre
+	left: 0px;
+	top: 0px;
+	width: 90px;
+	height: 100px;
+	border: 4px solid $color;
+	@include border-radius(18px);
+	@include animation( shadow .2s infinite ease-in-out );
+
+	// Volet
+	&::before {
+		top: -2px;
+		left: -2px;
+		width: 90px;
+		height: 80px;
+		background: white;
+		border: $line solid $color;
+		@include border-radius(15px 15px 0 0);
+		z-index: 0;
+	}
+	
+	// Poignée fenetre
+	&::after {
+		left: 37px;
+		top: 72px;
+		width: 11px;
+		height: 2px;
+		border: $line solid $color;
+		@include border-radius(10px);
+	}
+
+	&.open::before {
+		height: 20px;
+	}
+	&.open::after {
+		top: 12px;
+	}
+}
+
+
+.hublot + .util1 {
+	// tete
+	display: none;
+
+	&::before {
+		top: 40px;
+		left: 15px;
+		width: 27px;
+		height: 30px;
+		border: $line solid $color;
+		@include border-radius(50%);
+		z-index: 0;
+		@include transition( none);
+	}
+	
+	// Corps
+	&::after {
+		left: 14px;
+		top: 75px;
+		width: 31px;
+		height: 28px;
+		border: $line solid $color;
+		@include border-radius(40% 80% 0 9px);
+		@include transition( none);
+	}
+}
+
+.hublot.open + .util1 {
+	display: block;
+}
+
+
+@include keyframes( shadow ) {
+	0%		{ box-shadow: -200px 0px 0px rgba(0, 0, 0, 0); }
+	50%		{ box-shadow: 0px 0px 0px rgba(0, 0, 0, .05); }
+	100%	{ box-shadow: 200px 0px 0px rgba(0, 0, 0, 0); }
+}
+
